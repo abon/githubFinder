@@ -13,7 +13,7 @@ class UI {
             <a
               href="${user.html_url}"
               target="_blank"
-              class="btn btn-light"
+              class="btn btn-info"
             >
               View Profile
             </a>
@@ -46,5 +46,36 @@ class UI {
       <h3>Latest Repos</h3>
       <div class='repos'></div>
     `;
+  }
+  //show alert message
+  showAlert(message, className) {
+    const div = document.createElement("div");
+    //add classes
+    div.className = className;
+    //add text
+    //clear alert remaining alerts
+    this.clearAlert();
+    div.appendChild(document.createTextNode(message));
+    const container = document.querySelector(".searchContainer");
+    const search = document.querySelector(".search");
+    container.insertBefore(div, search);
+
+    //timeout after 3sec
+    setTimeout(() => {
+      this.clearAlert();
+      this.clearProfile();
+    }, 3000);
+  }
+
+  clearAlert() {
+    const currentAlert = document.querySelector(".alert");
+    if (currentAlert) {
+      currentAlert.remove();
+    }
+  }
+
+  //clear profile message
+  clearProfile() {
+    this.profile.innerHTML = "";
   }
 }
